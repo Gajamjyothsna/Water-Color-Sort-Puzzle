@@ -1,2 +1,2 @@
 # Water-Color-Sort-Puzzle
-Water Color Sort is a puzzle game in which your objective is to sort liquids by color by mixing them properly. 
+Water Color Sort is a puzzle game in which your objective is to sort liquids by color by mixing them properly. Start by moving the fluids into the right tubes until there is only one color per tube. Think logically and find your own way to sort the colorful water. If you get stuck or make mistakes, you can always get a hint or undo your last movement! Share Water Color Sort with your friends and learn who can finish the game the fastest!

@@ -61,10 +61,13 @@ public class LiquidBottle2D : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 endPosition;
 
+    [SerializeField] private float FillAmountValue;
+
     private void Start()
     {
         GetBottleMaterial(); //Getting Bottle Material
         bottleMaterial.SetFloat(fillAmountId, fillAmounts[numberOfColorsInBottle]);
+        FillAmountValue = fillAmounts[numberOfColorsInBottle];
         originalPosition = transform.position;
         SetLiquidColors(); //Setting Up Colors
         UpdateTopColorValues();
@@ -146,7 +149,7 @@ public class LiquidBottle2D : MonoBehaviour
             //Applying the Lerped rotation and Fill Amount value in each frame for smooth linear transistion
             bottleMaterial.SetFloat(rotationAmountId, rotValue);
 
-            if (fillAmounts[numberOfColorsInBottle] > fillAmountCurve.Evaluate(angleValue) + 0.15f)
+            if (fillAmounts[numberOfColorsInBottle] > fillAmountCurve.Evaluate(angleValue))
             {
                 if(lineRenderer.enabled == false)
                 {
@@ -158,6 +161,7 @@ public class LiquidBottle2D : MonoBehaviour
                     lineRenderer.enabled = true;
                 }
                 bottleMaterial.SetFloat(fillAmountId, fillAmountValue);
+                FillAmountValue = fillAmountValue;
 
                 _SecondBottleRef.FillUp(fillAmountCurve.Evaluate(lastAngleValue) - fillAmountCurve.Evaluate(angleValue));
             }
@@ -305,7 +309,11 @@ public class LiquidBottle2D : MonoBehaviour
 
     private void FillUp(float _fillAmountToAdd)
     {
+        Debug.Log("FillUp Amount" + _fillAmountToAdd);
+
         bottleMaterial.SetFloat(fillAmountId, bottleMaterial.GetFloat(fillAmountId) + _fillAmountToAdd);
+
+        FillAmountValue = _fillAmountToAdd + bottleMaterial.GetFloat(fillAmountId);
     }
 
     private void ChooseRotationPointAndDirection()
@@ -326,8 +334,10 @@ public class LiquidBottle2D : MonoBehaviour
     {
         ChooseRotationPointAndDirection();
 
+        Debug.Log("Number of Top ColorLayers" + numberOfTopColorLayers);
+        Debug.Log("secondBottleRef" + _SecondBottleRef.numberOfColorsInBottle);
         numberOfColorsToTransfer = Mathf.Min(numberOfTopColorLayers, 4 - _SecondBottleRef.numberOfColorsInBottle);
-
+        Debug.Log("Number of Colors to transfer" + numberOfColorsToTransfer);
         for (int i = 0; i < numberOfColorsToTransfer; i++)
         {
             _SecondBottleRef.liquidColors[_SecondBottleRef.numberOfColorsInBottle + i] = topColor;

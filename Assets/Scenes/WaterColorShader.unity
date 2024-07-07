@@ -263,10 +263,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bottleSR: {fileID: 106745477}
   liquidColors:
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
+  - {r: 0.7883744, g: 0, b: 1, a: 1}
+  - {r: 0.047483012, g: 0.1848228, b: 0.93207544, a: 1}
+  - {r: 0.7883744, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.9890294, a: 1}
   fillAmountCurve:
     serializedVersion: 2
     m_Curve:
@@ -389,7 +389,7 @@ MonoBehaviour:
   - 71
   - 83
   - 90
-  numberOfColorsInBottle: 3
+  numberOfColorsInBottle: 4
   topColor: {r: 0, g: 0, b: 0, a: 0}
   numberOfTopColorLayers: 1
   leftRotationPoint: {fileID: 451831814}
@@ -676,10 +676,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bottleSR: {fileID: 417365531}
   liquidColors:
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
   fillAmountCurve:
     serializedVersion: 2
     m_Curve:
@@ -802,7 +802,7 @@ MonoBehaviour:
   - 71
   - 83
   - 90
-  numberOfColorsInBottle: 3
+  numberOfColorsInBottle: 0
   topColor: {r: 0, g: 0, b: 0, a: 0}
   numberOfTopColorLayers: 1
   leftRotationPoint: {fileID: 78715334}
@@ -1101,10 +1101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bottleSR: {fileID: 783597941}
   liquidColors:
-  - {r: 0, g: 1, b: 0.097902775, a: 1}
-  - {r: 0, g: 1, b: 0.097902775, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
   fillAmountCurve:
     serializedVersion: 2
     m_Curve:
@@ -1227,7 +1227,7 @@ MonoBehaviour:
   - 71
   - 83
   - 90
-  numberOfColorsInBottle: 4
+  numberOfColorsInBottle: 0
   topColor: {r: 0, g: 0, b: 0, a: 0}
   numberOfTopColorLayers: 1
   leftRotationPoint: {fileID: 1983715024}
@@ -1919,10 +1919,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bottleSR: {fileID: 1195999136}
   liquidColors:
+  - {r: 0.96981126, g: 0.46096548, b: 0.027447322, a: 1}
   - {r: 0, g: 1, b: 0.097902775, a: 1}
-  - {r: 0, g: 1, b: 0.097902775, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
+  - {r: 0.94716984, g: 0.16117421, b: 0.062548816, a: 1}
+  - {r: 0.2588235, g: 0.39040196, b: 1, a: 1}
   fillAmountCurve:
     serializedVersion: 2
     m_Curve:
@@ -2321,10 +2321,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bottleSR: {fileID: 1494849781}
   liquidColors:
-  - {r: 0, g: 1, b: 0.097902775, a: 1}
-  - {r: 0, g: 1, b: 0.097902775, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
+  - {r: 0.7883744, g: 0, b: 1, a: 1}
+  - {r: 0.96981126, g: 0.46096548, b: 0.027447322, a: 1}
+  - {r: 0, g: 1, b: 0.15754032, a: 1}
+  - {r: 0, g: 1, b: 0.15754032, a: 1}
   fillAmountCurve:
     serializedVersion: 2
     m_Curve:
@@ -3015,10 +3015,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bottleSR: {fileID: 1616456580}
   liquidColors:
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
+  - {r: 0.94716984, g: 0.16117421, b: 0.062548816, a: 1}
+  - {r: 0.7883744, g: 0, b: 1, a: 1}
+  - {r: 0.96981126, g: 0.46096548, b: 0.027447322, a: 1}
+  - {r: 0.96981126, g: 0.46096548, b: 0.027447322, a: 1}
   fillAmountCurve:
     serializedVersion: 2
     m_Curve:
@@ -3141,7 +3141,7 @@ MonoBehaviour:
   - 71
   - 83
   - 90
-  numberOfColorsInBottle: 3
+  numberOfColorsInBottle: 4
   topColor: {r: 0, g: 0, b: 0, a: 0}
   numberOfTopColorLayers: 1
   leftRotationPoint: {fileID: 782496790}
@@ -3335,9 +3335,9 @@ MonoBehaviour:
   bottleSR: {fileID: 1835199248}
   liquidColors:
   - {r: 0, g: 1, b: 0.097902775, a: 1}
-  - {r: 0, g: 1, b: 0.097902775, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
+  - {r: 0.94716984, g: 0.16117421, b: 0.062548816, a: 1}
+  - {r: 1, g: 0, b: 0.9890294, a: 1}
+  - {r: 0.7883744, g: 0, b: 1, a: 1}
   fillAmountCurve:
     serializedVersion: 2
     m_Curve:
@@ -3743,10 +3743,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bottleSR: {fileID: 1979672574}
   liquidColors:
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
-  - {r: 1, g: 0.8368231, b: 0, a: 1}
+  - {r: 0.047483012, g: 0.1848228, b: 0.93207544, a: 1}
+  - {r: 0.7883744, g: 0, b: 1, a: 1}
+  - {r: 0.047483012, g: 0.1848228, b: 0.93207544, a: 1}
+  - {r: 0.94716984, g: 0.16117421, b: 0.062548816, a: 1}
   fillAmountCurve:
     serializedVersion: 2
     m_Curve:

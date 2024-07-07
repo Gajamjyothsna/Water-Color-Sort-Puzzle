@@ -2292,6 +2292,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstBottle: {fileID: 0}
   secondBottle: {fileID: 0}
+  bottles:
+  - {fileID: 1195999137}
+  - {fileID: 106745476}
+  - {fileID: 1835199246}
+  - {fileID: 1979672573}
+  - {fileID: 1494849779}
+  - {fileID: 1616456579}
+  - {fileID: 783597940}
+  - {fileID: 417365530}
 --- !u!1 &1494849778
 GameObject:
   m_ObjectHideFlags: 0

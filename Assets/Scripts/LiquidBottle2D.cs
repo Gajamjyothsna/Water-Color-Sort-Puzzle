@@ -149,7 +149,7 @@ public class LiquidBottle2D : MonoBehaviour
             //Applying the Lerped rotation and Fill Amount value in each frame for smooth linear transistion
             bottleMaterial.SetFloat(rotationAmountId, rotValue);
 
-            if (fillAmounts[numberOfColorsInBottle] > fillAmountCurve.Evaluate(angleValue))
+            if (fillAmounts[numberOfColorsInBottle] > fillAmountCurve.Evaluate(angleValue) + 0.15f)
             {
                 if(lineRenderer.enabled == false)
                 {

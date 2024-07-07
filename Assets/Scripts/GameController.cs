@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour
 {
     public LiquidBottle2D firstBottle;
     public LiquidBottle2D secondBottle;
+
+    public List<LiquidBottle2D> bottles;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +55,7 @@ public class GameController : MonoBehaviour
                             if(secondBottle.FillBottleColorCheck(firstBottle.topColor) == true)
                             {
                                 firstBottle.StartColorTransfer();
+                                StartCoroutine(CheckForGameOver()); // Check for game over after the color transfer
                                 firstBottle = null;
                                 secondBottle = null;
                             }
@@ -72,5 +75,52 @@ public class GameController : MonoBehaviour
 
         }
         
+    }
+
+    private IEnumerator CheckForGameOver()
+    {
+        // Wait until the transfer animation is complete
+        yield return new WaitForSeconds(firstBottle.RotationTime * 2); // Adjust this if needed
+
+        if (AreAllBottlesSorted())
+        {
+            Debug.Log("Game Over: All bottles are sorted!");
+            // You can trigger your game over UI or any other logic here
+        }
+        else
+        {
+            Debug.Log("Game is not over");
+        }
+    }
+
+    private bool AreAllBottlesSorted()
+    {
+        foreach (LiquidBottle2D bottle in bottles)
+        {
+            if (!IsBottleSorted(bottle))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private bool IsBottleSorted(LiquidBottle2D bottle)
+    {
+        // A bottle is sorted if all its colors are the same and it has 4 colors
+        if (bottle.numberOfColorsInBottle != 4)
+        {
+            return false;
+        }
+
+        Color firstColor = bottle.liquidColors[0];
+        for (int i = 1; i < bottle.numberOfColorsInBottle; i++)
+        {
+            if (bottle.liquidColors[i] != firstColor)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

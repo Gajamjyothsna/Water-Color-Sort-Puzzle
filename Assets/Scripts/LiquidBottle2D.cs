@@ -19,7 +19,7 @@ public class LiquidBottle2D : MonoBehaviour
     public float RotationTime;
 
     //Private Variables
-    private Material bottleMaterial;
+    public Material bottleMaterial;
     private int numberOfColorsToTransfer = 0;
 
     [Header("Referenced Second Bottle")]
@@ -61,7 +61,7 @@ public class LiquidBottle2D : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 endPosition;
 
-    [SerializeField] private float FillAmountValue;
+    [SerializeField] public float FillAmountValue;
 
     private void Start()
     {
@@ -138,8 +138,6 @@ public class LiquidBottle2D : MonoBehaviour
             angleValue = Mathf.Lerp(0f, directionMultiplier * rotationValues[rotationIndex], lerpValue);
 
             //Applying the Lerped Angle value in each frame for smooth linear transistion
-            // transform.eulerAngles = new Vector3(0, 0, angleValue);
-
             transform.RotateAround(chosenRotationPoint.position, Vector3.forward, lastAngleValue - angleValue);
 
             float rotValue = rotationAmountCurve.Evaluate(angleValue);
@@ -174,7 +172,6 @@ public class LiquidBottle2D : MonoBehaviour
         
         //Applying the Final Rotation and Other material Property values
         angleValue = directionMultiplier * rotationValues[rotationIndex];
-      //  transform.eulerAngles = new Vector3(0, 0, angleValue);
         float finalRotValue = rotationAmountCurve.Evaluate(angleValue);
         float finalFillAmountValue = fillAmountCurve.Evaluate(angleValue);
 
@@ -204,8 +201,6 @@ public class LiquidBottle2D : MonoBehaviour
             angleValue = Mathf.Lerp(directionMultiplier * rotationValues[rotationIndex], 0f, lerpValue);
 
             //Applying the Lerped Angle value in each frame for smooth linear transistion
-            // transform.eulerAngles = new Vector3(0, 0, angleValue);
-
             transform.RotateAround(chosenRotationPoint.position, Vector3.forward, lastAngleValue - angleValue);
 
             float rotValue = rotationAmountCurve.Evaluate(angleValue);
@@ -287,19 +282,23 @@ public class LiquidBottle2D : MonoBehaviour
 
     public bool FillBottleColorCheck(Color _colorToCheck)
     {
-        if (numberOfColorsInBottle == 0) return true;
-        else
+        if (numberOfColorsInBottle == 0)
         {
-            if(numberOfColorsInBottle == 4)
-            {
-                return false;
-            }
-            else
-            {
-                if(topColor.Equals(_colorToCheck)) return true;
-                else { return false; }
-            }
+            // Bottle is empty, can add any color
+            return true;
         }
+
+        if (numberOfColorsInBottle == 4)
+        {
+            // Bottle is full, cannot add any more colors
+            return false;
+        }
+
+        // Check if _colorToCheck matches the current top color after pouring
+        UpdateTopColorValues();
+
+        // Compare with the updated topColor
+        return topColor.Equals(_colorToCheck);
     }
 
     private void CalculateRotationIndex(int numberOfEmptySpacesInSecondBottle)
@@ -309,8 +308,6 @@ public class LiquidBottle2D : MonoBehaviour
 
     private void FillUp(float _fillAmountToAdd)
     {
-        Debug.Log("FillUp Amount" + _fillAmountToAdd);
-
         bottleMaterial.SetFloat(fillAmountId, bottleMaterial.GetFloat(fillAmountId) + _fillAmountToAdd);
 
         FillAmountValue = _fillAmountToAdd + bottleMaterial.GetFloat(fillAmountId);
@@ -334,10 +331,7 @@ public class LiquidBottle2D : MonoBehaviour
     {
         ChooseRotationPointAndDirection();
 
-        Debug.Log("Number of Top ColorLayers" + numberOfTopColorLayers);
-        Debug.Log("secondBottleRef" + _SecondBottleRef.numberOfColorsInBottle);
         numberOfColorsToTransfer = Mathf.Min(numberOfTopColorLayers, 4 - _SecondBottleRef.numberOfColorsInBottle);
-        Debug.Log("Number of Colors to transfer" + numberOfColorsToTransfer);
         for (int i = 0; i < numberOfColorsToTransfer; i++)
         {
             _SecondBottleRef.liquidColors[_SecondBottleRef.numberOfColorsInBottle + i] = topColor;
@@ -355,7 +349,6 @@ public class LiquidBottle2D : MonoBehaviour
 
     private IEnumerator MoveBottle()
     {
-        Debug.Log("Move Bottle");
         startPosition = transform.position;
         if(chosenRotationPoint == leftRotationPoint)
         {
@@ -399,5 +392,71 @@ public class LiquidBottle2D : MonoBehaviour
         transform.GetComponent<SpriteRenderer>().sortingOrder -= 2;
         bottleSR.sortingOrder -= 2;
 
+    }
+
+    public List<Color> GetBottleColors()
+    {
+        List<Color> colors = new List<Color>
+        {
+            bottleMaterial.GetColor(fourthColorPropertyId),
+            bottleMaterial.GetColor(thirdColorPropertyId),
+            bottleMaterial.GetColor(secondColorPropertyId),
+            bottleMaterial.GetColor(firstColorPropertyId)
+        };
+
+        // Filter out any default colors that represent an empty state
+        colors.RemoveAll(color => color == default(Color));
+        return colors;
+    }
+
+    // Method to get the fill amount from the material
+    public float GetFillAmount()
+    {
+        Debug.Log("FillAMount" + bottleMaterial.GetFloat(fillAmountId) + " Name " + gameObject.name);
+        return bottleMaterial.GetFloat(fillAmountId);
+    }
+
+
+    public bool IsGameOver()
+    {
+        List<Color> colors = GetBottleColors();
+        if (colors.Count < 4)
+        {
+            return false; // Not full yet
+        }
+
+        Color firstColor = colors[0];
+        foreach (Color color in colors)
+        {
+            if (color != firstColor)
+            {
+                Debug.Log("color is same");
+                return false;
+            }
+        }
+
+        // All colors are the same and the bottle is considered full
+        Debug.Log("True case ");
+        return true;
+    }
+
+    public bool IsEmpty()
+    {
+        List<Color> colors = GetBottleColors();
+        if (colors.Count > 0)
+        {
+            // Check if all colors are different
+            Color firstColor = colors[0];
+            foreach (Color color in colors)
+            {
+                if (color != firstColor)
+                {
+                    return false; // Colors are not the same
+                }
+            }
+        }
+
+        // Check if fill amount is less than zero
+        return GetFillAmount() < 0.0f;
     }
 }

@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    #region Public Variables
     public LiquidBottle2D firstBottle;
     public LiquidBottle2D secondBottle;
-
     public List<LiquidBottle2D> bottles;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    #endregion
+
+    #region MonoBehaviour Methods
 
     // Update is called once per frame
     void Update()
@@ -27,12 +26,8 @@ public class GameController : MonoBehaviour
             // Increase the raycast range and make sure it starts at a Z position that hits the 2D colliders
             RaycastHit2D hit = Physics2D.Raycast(mousePosition2D, Vector2.zero, Mathf.Infinity);
 
-            Debug.Log("Mouse position 2d " + mousePosition2D);
-
             if(hit.collider != null)
             {
-                Debug.Log("Hit collider" + hit.collider.gameObject.name);
-
                 if (hit.collider.GetComponent<LiquidBottle2D>() != null) 
                 { 
                     if(firstBottle ==  null)
@@ -77,15 +72,20 @@ public class GameController : MonoBehaviour
         
     }
 
+    #endregion
+
+    #region Private Variables
+
     private IEnumerator CheckForGameOver()
     {
         // Wait until the transfer animation is complete
-        yield return new WaitForSeconds(firstBottle.RotationTime * 2); // Adjust this if needed
+        yield return new WaitForSeconds(firstBottle.RotationTime * 2); 
 
         if (AreAllBottlesSorted())
         {
-            Debug.Log("Game Over: All bottles are sorted!");
-            // You can trigger your game over UI or any other logic here
+            Debug.LogError("Game Over: All bottles are sorted!");
+
+            StartCoroutine(HandleGameOver());
         }
         else
         {
@@ -95,32 +95,44 @@ public class GameController : MonoBehaviour
 
     private bool AreAllBottlesSorted()
     {
+        int filledBottlesCount = 0;
+        int emptyBottlesCount = 0;
+
         foreach (LiquidBottle2D bottle in bottles)
         {
-            if (!IsBottleSorted(bottle))
+            if (bottle.IsEmpty())
             {
-                return false;
+                emptyBottlesCount++;
             }
+           else if (bottle.IsGameOver())
+            {
+                filledBottlesCount++;
+            }
+            Debug.Log("FilledBottlesCount" + filledBottlesCount);
+            Debug.Log("EmptyBottlesCount " + emptyBottlesCount);
         }
-        return true;
+        // Check if the filled Bottle condition met
+        return filledBottlesCount == 6;
     }
 
-    private bool IsBottleSorted(LiquidBottle2D bottle)
+    private IEnumerator HandleGameOver() 
     {
-        // A bottle is sorted if all its colors are the same and it has 4 colors
-        if (bottle.numberOfColorsInBottle != 4)
+        // Handle the game-over logic here
+        Debug.Log("Handling game over!");
+
+        yield return new WaitForSeconds(2f);
+
+        if (SceneManager.GetActiveScene().name == "Level7")
         {
-            return false;
+            Debug.Log("Load scene 8");
+            SceneManager.LoadScene("Level8");
         }
 
-        Color firstColor = bottle.liquidColors[0];
-        for (int i = 1; i < bottle.numberOfColorsInBottle; i++)
+        else if(SceneManager.GetActiveScene().name == "Level8")
         {
-            if (bottle.liquidColors[i] != firstColor)
-            {
-                return false;
-            }
+            SceneManager.LoadScene("SampleScene");
         }
-        return true;
+
     }
+    #endregion
 }
